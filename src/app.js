@@ -1,10 +1,11 @@
-import styles from "./app.module.css"
-import { ReactComponent as Logo } from "assets/logo.svg"
+import { ApolloProvider } from "@apollo/client"
+import { GitHubClient } from "api/client"
+import { WelcomePage } from "pages/welcome"
 
 export function App() {
   return (
-    <div className={styles.app}>
-      <Logo className={styles.logo} />
-    </div>
+    <ApolloProvider client={new GitHubClient()}>
+      <WelcomePage />
+    </ApolloProvider>
   )
 }

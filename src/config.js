@@ -9,3 +9,11 @@ function getConfigOption(name, defaultValue = undefined) {
     throw new Error(`Missing configuration REACT_APP_${name}`);
   }
 }
+
+const apiUrl = () => "https://api.github.com/graphql"
+const accessToken = () => getConfigOption("GITHUB_ACCESS_TOKEN")
+
+export const config = {
+  apiUrl,
+  accessToken,
+}
