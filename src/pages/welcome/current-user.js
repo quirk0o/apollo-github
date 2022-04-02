@@ -17,8 +17,6 @@ export function CurrentUser() {
   if (loading) return <Logo className={styles.logo} />
   if (error) return <p>Error :(</p>
 
-  console.log(data)
-
   return (
     <>
       <Logo className={styles.logo} />
