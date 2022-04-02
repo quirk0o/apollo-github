@@ -1,0 +1,20 @@
+.app {
+  height: 100%;
+  width: 100%;
+
+  background: url("https://d33wubrfki0l68.cloudfront.net/79880a56361cfde4c79207d6988a63495a3c1110/953fa/static/home-hero-ec83eaa910bbb42b62391e145e6c9a5f.png")
+    no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.logo {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+}

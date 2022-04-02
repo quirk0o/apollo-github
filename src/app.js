@@ -1,5 +1,10 @@
-import React from "react";
+import styles from "./app.module.css"
+import { ReactComponent as Logo } from "assets/logo.svg"
 
 export function App() {
-  return <main></main>;
+  return (
+    <div className={styles.app}>
+      <Logo className={styles.logo} />
+    </div>
+  )
 }

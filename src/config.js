@@ -1,5 +1,5 @@
 function getConfigOption(name, defaultValue = undefined) {
-  const value = rocess.env[`REACT_APP_${name}`];
+  const value = process.env[`REACT_APP_${name}`];
 
   if (value !== undefined) {
     return value;
