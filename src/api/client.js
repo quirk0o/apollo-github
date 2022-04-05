@@ -58,7 +58,7 @@ export function GitHubClient() {
       },
       User: {
         fields: {
-          pullRequests: relayStylePagination(),
+          pullRequests: relayStylePagination(["states"]),
         },
       },
     },
