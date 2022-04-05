@@ -12,9 +12,11 @@ const PullRequestsQuery = gql`
         states: [OPEN]
       ) {
         nodes {
+          id
           title
           url
           state
+          isDraft
         }
       }
     }
