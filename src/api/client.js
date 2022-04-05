@@ -5,6 +5,7 @@ import {
   InMemoryCache,
 } from "@apollo/client"
 import { onError } from "@apollo/client/link/error"
+import { relayStylePagination } from "@apollo/client/utilities"
 
 import { config } from "config"
 

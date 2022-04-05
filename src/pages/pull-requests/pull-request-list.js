@@ -5,33 +5,52 @@ import { range } from "ramda"
 import { PullRequestItem } from "./pull-request-item"
 
 const PullRequestsQuery = gql`
-  query MyOpenPullRequests($states: [PullRequestState!]) {
+  query MyPullRequests(
+    $states: [PullRequestState!]
+    $first: Int
+    $after: String
+    $last: Int
+    $before: String
+  ) {
     viewer {
       id
       pullRequests(
-        first: 100
+        first: $first
+        after: $after
+        last: $last
+        before: $before
         orderBy: { field: CREATED_AT, direction: DESC }
         states: $states
       ) {
-        nodes {
-          id
-          title
-          url
-          state
-          isDraft
-          changedFiles
-          additions
-          deletions
-          headRef {
-            target {
-              ... on Commit {
-                status {
-                  state
+        edges {
+          cursor
+          node {
+            id
+            title
+            url
+            state
+            isDraft
+            changedFiles
+            additions
+            deletions
+            headRef {
+              target {
+                ... on Commit {
+                  status {
+                    state
+                  }
                 }
               }
             }
+            score @client
           }
-          score @client
+        }
+        totalCount
+        pageInfo {
+          hasNextPage
+          hasPreviousPage
+          startCursor
+          endCursor
         }
       }
     }
@@ -39,13 +58,15 @@ const PullRequestsQuery = gql`
 `
 
 export function PullRequestList({ states }) {
-  const { data, loading, error } = useQuery(PullRequestsQuery, {
-    variables: { states },
+  const { data, loading, error, fetchMore } = useQuery(PullRequestsQuery, {
+    variables: { states, first: 10 },
   })
 
   if (error) return <p>Error :(</p>
 
-  const pullRequests = data?.viewer?.pullRequests?.nodes || []
+  const pullRequests = data?.viewer?.pullRequests?.edges || []
+  const pageInfo = data?.viewer?.pullRequests?.pageInfo
+
   return (
     <>
       <List>
@@ -62,13 +83,22 @@ export function PullRequestList({ states }) {
           ))}
 
         {!loading &&
-          pullRequests.map((pr) => <PullRequestItem key={pr.id} {...pr} />)}
+          pullRequests.map((pr) => (
+            <PullRequestItem key={pr.id} {...pr.node} />
+          ))}
       </List>
 
       <div className="ant-pagination">
-        <button className="ant-pagination-item">
-          <a>Load More</a>
-        </button>
+        {pageInfo?.hasNextPage && (
+          <button
+            className="ant-pagination-item"
+            onClick={() =>
+              fetchMore({ variables: { after: pageInfo?.endCursor } })
+            }
+          >
+            <a>Load More</a>
+          </button>
+        )}
       </div>
     </>
   )
