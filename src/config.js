@@ -1,12 +1,12 @@
 function getConfigOption(name, defaultValue = undefined) {
-  const value = process.env[`REACT_APP_${name}`];
+  const value = process.env[`REACT_APP_${name}`]
 
   if (value !== undefined) {
-    return value;
+    return value
   } else if (defaultValue !== undefined && typeof defaultValue === "string") {
-    return defaultValue;
+    return defaultValue
   } else {
-    throw new Error(`Missing configuration REACT_APP_${name}`);
+    throw new Error(`Missing configuration REACT_APP_${name}`)
   }
 }
 
