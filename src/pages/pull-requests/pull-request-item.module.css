@@ -1,0 +1,21 @@
+.attributes {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.attributes > *:last-child {
+  margin-left: 66px;
+}
+
+@media screen and (max-width: 768px) {
+  .attributes > *:last-child {
+    margin-left: 42px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .attributes > *:last-child {
+    margin-left: 30px;
+  }
+}
