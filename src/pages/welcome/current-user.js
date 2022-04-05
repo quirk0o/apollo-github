@@ -1,3 +1,4 @@
+import { Loader } from "components/loader"
 import { ReactComponent as Logo } from "assets/logo.svg"
 import { gql, useQuery } from "@apollo/client"
 
@@ -14,7 +15,7 @@ const getUser = gql`
 export function CurrentUser() {
   const { data, loading, error } = useQuery(getUser)
 
-  if (loading) return <Logo className={styles.logo} />
+  if (loading) return <Loader />
   if (error) return <p>Error :(</p>
 
   return (
