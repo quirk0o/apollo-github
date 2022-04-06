@@ -20,6 +20,15 @@ const PullRequestsQuery = gql`
           changedFiles
           additions
           deletions
+          headRef {
+            target {
+              ... on Commit {
+                status {
+                  state
+                }
+              }
+            }
+          }
           score @client
         }
       }

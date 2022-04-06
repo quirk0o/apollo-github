@@ -41,10 +41,16 @@ export function GitHubClient() {
             const additions = readField("additions")
             const deletions = readField("deletions")
             const changedFiles = readField("changedFiles")
-            const score = Math.floor(
-              Math.abs(additions - deletions) / 100 +
-                Math.pow(changedFiles, 2) / 100
-            )
+            const headRef = readField("headRef")
+
+            const failurePenalty =
+              headRef?.target?.status?.state === "FAILURE" ? 10 : 0
+
+            const score =
+              Math.floor(
+                Math.abs(additions - deletions) / 100 +
+                  Math.pow(changedFiles, 2) / 100
+              ) + failurePenalty
             return score || 1
           },
         },
