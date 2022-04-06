@@ -23,7 +23,7 @@ const MakeDraftMutation = gql`
   }
 `
 
-export function PullRequestItem({ id, title, url, isDraft }) {
+export function PullRequestItem({ id, title, url, isDraft, score }) {
   const [makeDraft, result] = useMutation(MakeDraftMutation)
   const handleMakeDraft = useCallback(() => {
     return makeDraft({
@@ -46,7 +46,7 @@ export function PullRequestItem({ id, title, url, isDraft }) {
     <List.Item actions={actions}>
       <List.Item.Meta title={<a href={url}>{title}</a>} />
       <div className={styles.attributes}>
-        <ComplexityBadge score={42} />
+        <ComplexityBadge score={score} />
         {isDraft && <Tag>DRAFT</Tag>}
       </div>
     </List.Item>

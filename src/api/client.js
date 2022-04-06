@@ -33,7 +33,24 @@ export function GitHubClient() {
   })
 
   const link = ApolloLink.from([errorLink, httpLink])
-  const cache = new InMemoryCache()
+  const cache = new InMemoryCache({
+    typePolicies: {
+      PullRequest: {
+        fields: {
+          score(_, { readField }) {
+            const additions = readField("additions")
+            const deletions = readField("deletions")
+            const changedFiles = readField("changedFiles")
+            const score = Math.floor(
+              Math.abs(additions - deletions) / 100 +
+                Math.pow(changedFiles, 2) / 100
+            )
+            return score || 1
+          },
+        },
+      },
+    },
+  })
 
   return new ApolloClient({
     link,
