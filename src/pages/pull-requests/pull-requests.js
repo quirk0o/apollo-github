@@ -17,6 +17,10 @@ const PullRequestsQuery = gql`
           url
           state
           isDraft
+          changedFiles
+          additions
+          deletions
+          score @client
         }
       }
     }
