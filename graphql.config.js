@@ -1,7 +1,7 @@
 require("dotenv").config()
 
 module.exports = {
-  schema: "schema.graphql",
+  schema: ["schema.graphql", "client-schema.graphql"],
   extensions: {
     endpoints: {
       default: {
