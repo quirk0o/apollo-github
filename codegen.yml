@@ -1,0 +1,12 @@
+schema: 
+  "https://api.github.com/graphql":
+    headers:
+      Authorization: Bearer ${REACT_APP_GITHUB_ACCESS_TOKEN}
+
+generates:
+  ./schema.graphql:
+    plugins:
+      - schema-ast
+  ./src/api/mocks/graphql.schema.json:
+    plugins:
+      - introspection

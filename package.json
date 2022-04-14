@@ -24,7 +24,8 @@
     "posttest": "npm run format",
     "eject": "react-scripts eject",
     "server": "serve -s build",
-    "format": "prettier --loglevel warn --write \"**/*.{js,jsx,ts,tsx,css,less,scss,sass,html,json,md,mdx,yml,yaml,graphql,graphqls}\""
+    "format": "prettier --loglevel warn --write \"**/*.{js,jsx,ts,tsx,css,less,scss,sass,html,json,md,mdx,yml,yaml,graphql,graphqls}\"",
+    "gql:codegen": "graphql-codegen --require dotenv/config"
   },
   "eslintConfig": {
     "extends": [
@@ -45,8 +46,18 @@
     ]
   },
   "devDependencies": {
+    "@faker-js/faker": "^6.1.2",
+    "@graphql-codegen/cli": "^2.6.2",
+    "@graphql-codegen/introspection": "^2.1.1",
+    "@graphql-codegen/schema-ast": "^2.4.1",
+    "@graphql-tools/mock": "^8.6.6",
+    "@graphql-tools/schema": "^8.3.8",
+    "msw": "^0.39.2",
     "prettier": ">=2",
     "react-error-overlay": "6.0.9",
     "serve": "^11.2.0"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
